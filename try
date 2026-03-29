@@ -1,180 +1,223 @@
-import numpy as np
-import matplotlib.pyplot as plt
-from scipy import stats
+# -------------------------------
+# 1. n copies of a string
+# -------------------------------
+puts "\n1. String Copies"
+puts "Enter a string:"
+str = gets.chomp
 
-data = [10, 20, 20, 30, 40, 50]
+puts "Enter number of copies:"
+n = gets.chomp.to_i
 
-mean = np.mean(data)
-median = np.median(data)
-mode = stats.mode(data, keepdims=True).mode[0]
-variance = np.var(data)
-std_dev = np.std(data)
-
-print("Mean:", mean)
-print("Median:", median)
-print("Mode:", mode)
-print("Variance:", variance)
-print("Standard Deviation:", std_dev)
-
-# Graph
-plt.hist(data)
-plt.axvline(mean, linestyle='dashed', label='Mean')
-plt.axvline(median, linestyle='solid', label='Median')
-plt.title("Central Tendency Visualization")
-plt.legend()
-plt.show()
-
-import math
-import numpy as np
-from scipy import stats
-import matplotlib.pyplot as plt
-
-print("Square root:", math.sqrt(36))
-print("Factorial:", math.factorial(5))
-
-arr = np.array([1, 2, 3, 4, 5])
-
-print("Mean:", np.mean(arr))
-print("Sum:", np.sum(arr))
-print("Mode:", stats.mode(arr, keepdims=True))
-
-# Graph
-plt.plot(arr, marker='o')
-plt.title("NumPy Array Visualization")
-plt.show()
+puts "Result: #{str * n}"
 
 
+# -------------------------------
+# 2. Area and Perimeter of Circle
+# -------------------------------
+puts "\n2. Circle Area & Perimeter"
+puts "Enter radius:"
+r = gets.chomp.to_f
 
-import pandas as pd
-import matplotlib.pyplot as plt
+area = 3.14 * r * r
+perimeter = 2 * 3.14 * r
 
-data = {
-    'Students': ['A', 'B', 'C', 'D'],
-    'Marks': [60, 70, 80, 90]
+puts "Area = #{area}"
+puts "Perimeter = #{perimeter}"
+
+
+# -------------------------------
+# 3. Reverse First and Last Name
+# -------------------------------
+puts "\n3. Reverse Name"
+puts "Enter first name:"
+first = gets.chomp
+
+puts "Enter last name:"
+last = gets.chomp
+
+puts "Reversed: #{last} #{first}"
+
+
+# -------------------------------
+# 4. File Extension
+# -------------------------------
+puts "\n4. File Extension"
+puts "Enter filename:"
+file = gets.chomp
+
+puts "Extension: #{File.extname(file)}"
+
+
+# -------------------------------
+# 5. Greatest of Three Numbers
+# -------------------------------
+puts "\n5. Greatest of Three Numbers"
+puts "Enter three numbers:"
+a = gets.chomp.to_i
+b = gets.chomp.to_i
+c = gets.chomp.to_i
+
+puts "Greatest number is #{[a, b, c].max}"
+
+
+# -------------------------------
+# 6. Odd Numbers from 10 to 1
+# -------------------------------
+puts "\n6. Odd Numbers from 10 to 1"
+10.downto(1) do |i|
+  puts i if i % 2 != 0
+end
+
+
+# -------------------------------
+# 7. Check if one number is 20
+# -------------------------------
+puts "\n7. Check if one number is 20"
+puts "Enter two numbers:"
+x = gets.chomp.to_i
+y = gets.chomp.to_i
+
+if x == 20 || y == 20
+  puts true
+else
+  puts x + y
+end
+
+
+# -------------------------------
+# 8. Temperature Check
+# -------------------------------
+puts "\n8. Temperature Check"
+puts "Enter two temperatures:"
+t1 = gets.chomp.to_i
+t2 = gets.chomp.to_i
+
+if (t1 < 0 && t2 > 100) || (t2 < 0 && t1 > 100)
+  puts true
+else
+  puts false
+end
+
+
+# -------------------------------
+# 9. Print Array Elements
+# -------------------------------
+puts "\n9. Array Elements"
+arr = [1, 2, 3, 4, 5]
+
+arr.each do |val|
+  puts val
+end
+
+
+# -------------------------------
+# 10. Total Marks using Hash
+# -------------------------------
+puts "\n10. Total Marks"
+marks = {
+  "Math" => 80,
+  "Science" => 75,
+  "English" => 85
 }
 
-df = pd.DataFrame(data)
+total = 0
+marks.each do |subject, mark|
+  total += mark
+end
 
-print(df)
-
-# Graph
-plt.bar(df['Students'], df['Marks'])
-plt.title("Student Marks")
-plt.xlabel("Students")
-plt.ylabel("Marks")
-plt.show()
+puts "Total Marks = #{total}"
 
 
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.linear_model import LinearRegression
-
-X = np.array([1, 2, 3, 4, 5]).reshape(-1,1)
-y = np.array([2, 4, 6, 8, 10])
-
-model = LinearRegression()
-model.fit(X, y)
-
-prediction = model.predict(X)
-
-print("Prediction for 6:", model.predict([[6]]))
-
-# Graph
-plt.scatter(X, y)
-plt.plot(X, prediction)
-plt.title("Simple Linear Regression")
-plt.xlabel("X")
-plt.ylabel("Y")
-plt.show()
 
 
-import pandas as pd
-import matplotlib.pyplot as plt
-from sklearn.linear_model import LinearRegression
 
-data = {
-    'Area': [1000, 1500, 2000, 2500],
-    'Bedrooms': [2, 3, 4, 5],
-    'Price': [300000, 450000, 600000, 800000]
+
+# -------------------------------
+# 11. Factorial of a number
+# -------------------------------
+puts "Enter a number:"
+gets stdin num
+
+set fact 1
+for {set i 1} {$i <= $num} {incr i} {
+    set fact [expr {$fact * $i}]
+}
+puts "Factorial of $num is $fact"
+
+
+# -------------------------------
+# 12. Multiply numbers from 1 to 10
+# -------------------------------
+set result 1
+for {set i 1} {$i <= 10} {incr i} {
+    set result [expr {$result * $i}]
+}
+puts "Product from 1 to 10 is $result"
+
+
+# -------------------------------
+# 13. Sort list using comparison function
+# -------------------------------
+proc compare {a b} {
+    if {$a > $b} {return 1}
+    elseif {$a < $b} {return -1}
+    else {return 0}
 }
 
-df = pd.DataFrame(data)
-
-X = df[['Area', 'Bedrooms']]
-y = df['Price']
-
-model = LinearRegression()
-model.fit(X, y)
-
-print("Predicted price:", model.predict([[1800, 3]]))
-
-# Graph (Area vs Price)
-plt.scatter(df['Area'], df['Price'])
-plt.title("Area vs Price")
-plt.xlabel("Area")
-plt.ylabel("Price")
-plt.show()
+set list {5 2 9 1 7}
+set sortedList [lsort -command compare $list]
+puts "Sorted list: $sortedList"
 
 
+# -------------------------------
+# 14. List operations
+# -------------------------------
+set mylist {1 2 3}
+lappend mylist 4 5
 
-from sklearn.tree import DecisionTreeClassifier, plot_tree
-import matplotlib.pyplot as plt
+puts "Traversing list:"
+foreach item $mylist {
+    puts $item
+}
 
-X = [[0, 0], [1, 1], [2, 2], [3, 3]]
-y = [0, 0, 1, 1]
-
-model = DecisionTreeClassifier(max_depth=2)
-model.fit(X, y)
-
-print("Prediction:", model.predict([[1.5, 1.5]]))
-
-# Graph
-plt.figure()
-plot_tree(model, filled=True)
-plt.title("Decision Tree")
-plt.show()
+set list2 {6 7 8}
+set newlist [concat $mylist $list2]
+puts "Concatenated list: $newlist"
 
 
+# -------------------------------
+# 15. Compare file modified times
+# -------------------------------
+set file1 "file1.txt"
+set file2 "file2.txt"
 
-from sklearn.neighbors import KNeighborsClassifier
-import numpy as np
-import matplotlib.pyplot as plt
+set time1 [file mtime $file1]
+set time2 [file mtime $file2]
 
-X = np.array([[1], [2], [3], [4], [5]])
-y = np.array([0, 0, 1, 1, 1])
-
-model = KNeighborsClassifier(n_neighbors=3)
-model.fit(X, y)
-
-print("Prediction:", model.predict([[2.5]]))
-
-# Graph
-plt.scatter(X, y)
-plt.title("KNN Classification")
-plt.xlabel("X")
-plt.ylabel("Class")
-plt.show()
+if {$time1 > $time2} {
+    puts "$file1 is newer"
+} elseif {$time1 < $time2} {
+    puts "$file2 is newer"
+} else {
+    puts "Both files have same modification time"
+}
 
 
-from sklearn.neighbors import KNeighborsClassifier
-import numpy as np
-import matplotlib.pyplot as plt
+# -------------------------------
+# 16. Copy file and translate format
+# -------------------------------
+set src "source.txt"
+set dest "destination.txt"
 
-X = np.array([[1], [2], [3], [4], [5]])
-y = np.array([0, 0, 1, 1, 1])
+set in [open $src r]
+set out [open $dest w]
 
-model = KNeighborsClassifier(n_neighbors=3)
-model.fit(X, y)
+fconfigure $out -translation auto
 
-print("Prediction:", model.predict([[2.5]]))
+while {[gets $in line] >= 0} {
+    puts $out $line
+}
 
-# Graph
-plt.scatter(X, y)
-plt.title("KNN Classification")
-plt.xlabel("X")
-plt.ylabel("Class")
-plt.show()
-
-
-
-
+close $in
+close $out
+puts "File copied with native translation"
