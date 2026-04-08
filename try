@@ -1,205 +1,234 @@
-from collections import deque
-from itertools import permutations
+# # 1
+# import statistics
 
-# -------------------------------
-# 1. BFS (User Input Graph)
-# -------------------------------
-from collections import deque
+# data = [10, 20, 30, 40, 50, 20]
 
-graph = {}
-n = int(input("Enter number of nodes: "))
+# mean = sum(data) / len(data)
+# median = statistics.median(data)
 
-for _ in range(n):
-    node = input("Enter node: ")
-    neighbors = input(f"Enter neighbors of {node} (space separated): ").split()
-    graph[node] = neighbors
+# try:
+#     mode = statistics.mode(data)
+# except:
+#     mode = "No unique mode"
 
-start = input("Enter start node: ")
+# variance = statistics.variance(data)
+# std_dev = statistics.stdev(data)
 
-visited = set()
-queue = deque([start])
+# print(mean)
+# print(median)
+# print(mode)
+# print(variance)
+# print(std_dev)
 
-print("BFS Traversal:")
-while queue:
-    node = queue.popleft()
-    if node not in visited:
-        print(node, end=" ")
-        visited.add(node)
-        for neighbor in graph.get(node,[]):
-            if neighbor not in visited:
-                queue.append(neighbor)
-print()
+# # 2
+# import statistics
+# import math
+# import numpy as np
+# from scipy import stats
 
+# data = [1, 2, 3, 4, 5, 2]
 
-# ------------------------------- 
-# 2. DFS
-# -------------------------------
-def dfs_util(graph, node, visited):
-    if node not in visited:
-        print(node, end=" ")
-        visited.add(node)
+# print("Statistics Library")
+# print(statistics.mean(data))
+# print(statistics.median(data))
+# try:
+#     print(statistics.mode(data))
+# except:
+#     print("No unique mode")
+# print(statistics.variance(data))
+# print(statistics.stdev(data))
 
-        for n in graph.get(node, []):   # FIXED
-            dfs_util(graph, n, visited)
+# print("Math Library")
+# print(math.sqrt(25))
+# print(math.factorial(5))
+# print(math.log(10))
+# print(math.sin(0))
 
+# print("NumPy Library")
+# arr = np.array(data)
+# print(np.mean(arr))
+# print(np.median(arr))
+# print(np.std(arr))
+# print(np.sum(arr))
 
-graph = {}
-n = int(input("Enter number of nodes: "))
+# print("SciPy Library")
+# print(stats.describe(data))
 
-for _ in range(n):
-    node = input("Enter node: ")
-    neighbors = input(f"Enter neighbors of {node}: ").split()
-    graph[node] = neighbors
+# # 3
+# import pandas as pd
+# import matplotlib.pyplot as plt
 
-start = input("Enter start node: ")
+# data = {
+#     "Name": ["A", "B", "C", "D", "E"],
+#     "Marks": [85, 90, 78, 92, 88]
+# }
 
-print("DFS Traversal:")
-dfs_util(graph, start, set())
-print()
+# df = pd.DataFrame(data)
 
+# print(df)
+# print(df.head())
+# print(df.describe())
 
-# -------------------------------
-# 3. Tic Tac Toe
-# -------------------------------
-board = [" "] * 9
+# plt.plot(df["Name"], df["Marks"])
+# plt.xlabel("Name")
+# plt.ylabel("Marks")
+# plt.title("Student Marks")
+# plt.show()
 
-def print_board():
-    for i in range(0, 9, 3):
-        print(board[i:i+3])
+# # 4
+# import numpy as np
+# import matplotlib.pyplot as plt
 
-def check_winner(p):
-    wins = [(0,1,2),(3,4,5),(6,7,8),
-            (0,3,6),(1,4,7),(2,5,8),
-            (0,4,8),(2,4,6)]
-    return any(board[a]==board[b]==board[c]==p for a,b,c in wins)
+# x = np.array([1, 2, 3, 4, 5])
+# y = np.array([2, 4, 5, 4, 5])
 
-player = "X"
-winner=False
-for _ in range(9):
-    print_board()
-    move = int(input(f"{player} move (0-8): "))
-    if board[move] == " ":
-        board[move] = player
-        if check_winner(player):
-            print_board()
-            print(player, "wins!")
-            winner=False
-            break
-        player = "O" if player=="X" else "X"
-    else:
-        print("Invalid move")
-if not winner:
-    print("Draw!")
+# mean_x = np.mean(x)
+# mean_y = np.mean(y)
 
+# num = np.sum((x - mean_x) * (y - mean_y))
+# den = np.sum((x - mean_x) ** 2)
 
+# b1 = num / den
+# b0 = mean_y - b1 * mean_x
 
-# -------------------------------
-# 4. 8 Puzzle
-# -------------------------------
+# print(b0)
+# print(b1)
 
-def print_board(board):
-    for i in range(0, 9, 3):
-        print(board[i], board[i+1], board[i+2])
-    print()
+# y_pred = b0 + b1 * x
 
-board = [1,2,3,4,0,6,7,5,8]
+# plt.scatter(x, y)
+# plt.plot(x, y_pred)
+# plt.show()
 
-while True:
-    print_board(board)
+# #5
+# import numpy as np 
+# import matplotlib.pyplot as plt
+# from sklearn.linear_model import LinearRegression 
+# X=np.array([
+#     [1000,2,5],
+#     [1500,3,10],
+#     [1800,4,8],
+#     [1200,2,6],
+#     [2000,5,12]
+# ])
+# y=np.array([300000,400000,500000,320000,6000000])
+# model=LinearRegression()
+# model.fit(X,y)
+# yp=model.predict(X)
+# NH=np.array([[1600,3,7]])
+# print("Predict Price :",model.predict(NH)[0])
 
-    if board == [1,2,3,4,5,6,7,8,0]:
-        print("Puzzle Solved!")
-        break
+# plt.scatter(y,yp)
+# plt.xlabel("Actual price")
+# plt.ylabel("Predicted Price")
+# plt.title("pridect home price ")
+# plt.show()
 
-    move = input("Move (w=up, s=down, a=left, d=right): ")
+# 6
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier, plot_tree
+from sklearn.metrics import accuracy_score, classification_report
+import matplotlib.pyplot as plt
 
-    pos = board.index(0)
+# Load data
+X, y = load_iris(return_X_y=True)
 
-    if move == "w" and pos not in [0,1,2]:
-        board[pos], board[pos-3] = board[pos-3], board[pos]
+# Split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1)
 
-    elif move == "s" and pos not in [6,7,8]:
-        board[pos], board[pos+3] = board[pos+3], board[pos]
+# Train model (tuned)
+model = DecisionTreeClassifier(max_depth=2).fit(X_train, y_train)
 
-    elif move == "a" and pos not in [0,3,6]:
-        board[pos], board[pos-1] = board[pos-1], board[pos]
+# Predict
+y_pred = model.predict(X_test)
 
-    elif move == "d" and pos not in [2,5,8]:
-        board[pos], board[pos+1] = board[pos+1], board[pos]
+# Results
+print("Accuracy:", round(accuracy_score(y_test, y_pred), 2))
+print(classification_report(y_test, y_pred))
 
-    else:
-        print("Invalid move!")
+# Plot tree
+plt.figure(figsize=(8, 6))
+plot_tree(model, filled=True)
+plt.show()
 
-   
+# # 7
+# from sklearn.neighbors import KNeighborsClassifier
+# from sklearn.model_selection import train_test_split
+# from sklearn.datasets import load_iris
+# from sklearn.metrics import accuracy_score
 
-# -------------------------------
-# 5. Water Jug
-# -------------------------------
+# # Load dataset
+# X, y = load_iris(return_X_y=True)
 
-x = int(input("Enter capacity of jug1: "))
-y = int(input("Enter capacity of jug2: "))
-target = int(input("Enter target: "))
+# # Split
+# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=1)
 
-visited = set()
-stack = [(0,0)]
+# # Train
+# model = KNeighborsClassifier(n_neighbors=8).fit(X_train, y_train)
 
-print("Steps:")
-while stack:
-    a, b = stack.pop()
-    if (a,b) in visited:
-        continue
-    visited.add((a,b))
-    print(a, b)
+# # Predict
+# y_pred = model.predict(X_test)
 
-    if a == target or b == target:
-        print("Target reached")
-        return
-
-    stack.extend([
-        (x,b),(a,y),(0,b),(a,0),
-        (max(0,a-(y-b)), min(y,b+a)),
-        (min(x,a+b), max(0,b-(x-a)))
-    ])
-
-
-# -------------------------------
-# 6. TSP
-# -------------------------------
-
-n = int(input("Enter number of cities: "))
-graph = []
-
-print("Enter cost matrix:")
-for _ in range(n):
-    row = list(map(int, input().split()))
-    graph.append(row)
-
-cities = list(range(n))
-min_cost = float('inf')
-bp=None
-for perm in permutations(cities):
-    cost = 0
-    path=(0,)+perm(0, )
-    for i in range(len(path)-1):
-        cost+=graph[path[i]][path[i+1]]
-    if cost<min_cost:
-        min_cost=cost
-        bp=path
-
-print("Minimum Cost:", min_cost)
-print("Best Path:", bp)
+# # Accuracy
+# print("Accuracy:", accuracy_score(y_test, y_pred))
 
 
-# -------------------------------
-# 7. Tower of Hanoi
-# -------------------------------
-def hanoi(n, source, target, auxiliary):
-    if n == 1:
-        print(f"Move disk 1 from {source} to {target}")
-        return
-    hanoi(n-1, source, auxiliary, target)
-    print(f"Move disk {n} from {source} to {target}")
-    hanoi(n-1, auxiliary, target, source)
 
-n = int(input("Enter number of disks: "))
-hanoi(n, 'A', 'C', 'B')
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+
+data=pd.read_csv("study_hours.csv")
+
+x=data[['Study Hours']]
+y=data['Exam Result']
+
+X_train, X_test, y_train, y_test = train_test_split(x,y, test_size=0.2, random_state=42)
+model=LogisticRegression().fit(X_train,y_train)
+
+y_pred=model.predict(X_test)
+
+print("accuracy score: ",accuracy_score(y_test,y_pred))
+print("confusion matrix:\n ",confusion_matrix(y_test,y_pred))
+print("classifiction report:\n ",classification_report(y_test,y_pred))
+
+study_range=np.linspace(x.min()-1,x.max()+1,300).reshape(-1,1)
+porb=model.predict_proba(study_range)[:,-1]
+
+plt.scatter(X_train,y_train)
+plt.scatter(X_test,y_test,marker ="x")
+plt.plot(study_range,porb)
+plt.xlabel("Study Hours")
+plt.ylabel("Exam Result")
+plt.title("Logistic Regression - Study Hours vs Exam Result")
+plt.legend()
+plt.grid(True)
+plt.show()
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+from sklearn.datasets import make_blobs
+
+# Generate data
+X, _ = make_blobs(n_samples=300, centers=4, cluster_std=0.6, random_state=0)
+
+# Plot original data
+plt.scatter(*X.T)
+plt.title("Data Points")
+plt.show()
+
+# Apply KMeans
+kmeans = KMeans(n_clusters=4).fit(X)
+
+# Plot clustered data with centers
+plt.scatter(*X.T, c=kmeans.labels_)
+plt.scatter(*kmeans.cluster_centers_.T,  color='red')
+plt.title("Clustered Data")
+plt.show()
