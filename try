@@ -1,234 +1,565 @@
-# # 1
-# import statistics
+RUBY
 
-# data = [10, 20, 30, 40, 50, 20]
+1.
 
-# mean = sum(data) / len(data)
-# median = statistics.median(data)
 
-# try:
-#     mode = statistics.mode(data)
-# except:
-#     mode = "No unique mode"
+print " Enter string: "
+str = gets.chomp
 
-# variance = statistics.variance(data)
-# std_dev = statistics.stdev(data)
+print "Enter n: "
+n = gets.chomp.to_i   
 
-# print(mean)
-# print(median)
-# print(mode)
-# print(variance)
-# print(std_dev)
+for i in 1..n  
+  if n!=0
+    print str ," " 
+  end
+end  
 
-# # 2
-# import statistics
-# import math
-# import numpy as np
-# from scipy import stats
 
-# data = [1, 2, 3, 4, 5, 2]
 
-# print("Statistics Library")
-# print(statistics.mean(data))
-# print(statistics.median(data))
-# try:
-#     print(statistics.mode(data))
-# except:
-#     print("No unique mode")
-# print(statistics.variance(data))
-# print(statistics.stdev(data))
+2.
+print "Enter radius of the circle: "
+n= gets.chomp.to_i  
 
-# print("Math Library")
-# print(math.sqrt(25))
-# print(math.factorial(5))
-# print(math.log(10))
-# print(math.sin(0))
-
-# print("NumPy Library")
-# arr = np.array(data)
-# print(np.mean(arr))
-# print(np.median(arr))
-# print(np.std(arr))
-# print(np.sum(arr))
-
-# print("SciPy Library")
-# print(stats.describe(data))
-
-# # 3
-# import pandas as pd
-# import matplotlib.pyplot as plt
-
-# data = {
-#     "Name": ["A", "B", "C", "D", "E"],
-#     "Marks": [85, 90, 78, 92, 88]
-# }
-
-# df = pd.DataFrame(data)
-
-# print(df)
-# print(df.head())
-# print(df.describe())
-
-# plt.plot(df["Name"], df["Marks"])
-# plt.xlabel("Name")
-# plt.ylabel("Marks")
-# plt.title("Student Marks")
-# plt.show()
-
-# # 4
-# import numpy as np
-# import matplotlib.pyplot as plt
-
-# x = np.array([1, 2, 3, 4, 5])
-# y = np.array([2, 4, 5, 4, 5])
-
-# mean_x = np.mean(x)
-# mean_y = np.mean(y)
-
-# num = np.sum((x - mean_x) * (y - mean_y))
-# den = np.sum((x - mean_x) ** 2)
-
-# b1 = num / den
-# b0 = mean_y - b1 * mean_x
-
-# print(b0)
-# print(b1)
-
-# y_pred = b0 + b1 * x
-
-# plt.scatter(x, y)
-# plt.plot(x, y_pred)
-# plt.show()
-
-# #5
-# import numpy as np 
-# import matplotlib.pyplot as plt
-# from sklearn.linear_model import LinearRegression 
-# X=np.array([
-#     [1000,2,5],
-#     [1500,3,10],
-#     [1800,4,8],
-#     [1200,2,6],
-#     [2000,5,12]
-# ])
-# y=np.array([300000,400000,500000,320000,6000000])
-# model=LinearRegression()
-# model.fit(X,y)
-# yp=model.predict(X)
-# NH=np.array([[1600,3,7]])
-# print("Predict Price :",model.predict(NH)[0])
-
-# plt.scatter(y,yp)
-# plt.xlabel("Actual price")
-# plt.ylabel("Predicted Price")
-# plt.title("pridect home price ")
-# plt.show()
-
-# 6
-from sklearn.datasets import load_iris
-from sklearn.model_selection import train_test_split
-from sklearn.tree import DecisionTreeClassifier, plot_tree
-from sklearn.metrics import accuracy_score, classification_report
-import matplotlib.pyplot as plt
-
-# Load data
-X, y = load_iris(return_X_y=True)
-
-# Split
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1)
-
-# Train model (tuned)
-model = DecisionTreeClassifier(max_depth=2).fit(X_train, y_train)
-
-# Predict
-y_pred = model.predict(X_test)
-
-# Results
-print("Accuracy:", round(accuracy_score(y_test, y_pred), 2))
-print(classification_report(y_test, y_pred))
-
-# Plot tree
-plt.figure(figsize=(8, 6))
-plot_tree(model, filled=True)
-plt.show()
-
-# # 7
-# from sklearn.neighbors import KNeighborsClassifier
-# from sklearn.model_selection import train_test_split
-# from sklearn.datasets import load_iris
-# from sklearn.metrics import accuracy_score
-
-# # Load dataset
-# X, y = load_iris(return_X_y=True)
-
-# # Split
-# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=1)
-
-# # Train
-# model = KNeighborsClassifier(n_neighbors=8).fit(X_train, y_train)
-
-# # Predict
-# y_pred = model.predict(X_test)
-
-# # Accuracy
-# print("Accuracy:", accuracy_score(y_test, y_pred))
+puts "parameter of the circle : #{(2*Math::PI*n).round(2)}"
+ puts "area of the circle : #{(Math::PI*(n**2)).round(2)}"
 
 
 
 
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+3.
+print " Enter first name: "
+fname = gets.chomp
+print " Enter last name: "
+lname = gets.chomp
 
-data=pd.read_csv("study_hours.csv")
+name = fname +" " + lname
 
-x=data[['Study Hours']]
-y=data['Exam Result']
+print "Full Name : \n",name
 
-X_train, X_test, y_train, y_test = train_test_split(x,y, test_size=0.2, random_state=42)
-model=LogisticRegression().fit(X_train,y_train)
+words = name.split(" ")
 
-y_pred=model.predict(X_test)
+reverse = words.reverse.join(" ")
 
-print("accuracy score: ",accuracy_score(y_test,y_pred))
-print("confusion matrix:\n ",confusion_matrix(y_test,y_pred))
-print("classifiction report:\n ",classification_report(y_test,y_pred))
-
-study_range=np.linspace(x.min()-1,x.max()+1,300).reshape(-1,1)
-porb=model.predict_proba(study_range)[:,-1]
-
-plt.scatter(X_train,y_train)
-plt.scatter(X_test,y_test,marker ="x")
-plt.plot(study_range,porb)
-plt.xlabel("Study Hours")
-plt.ylabel("Exam Result")
-plt.title("Logistic Regression - Study Hours vs Exam Result")
-plt.legend()
-plt.grid(True)
-plt.show()
+puts "\nReversed name : #{reverse}\n"
 
 
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.cluster import KMeans
-from sklearn.datasets import make_blobs
 
-# Generate data
-X, _ = make_blobs(n_samples=300, centers=4, cluster_std=0.6, random_state=0)
+reverse_full = name.reverse
+print "Reversed :  #{reverse_full}"
 
-# Plot original data
-plt.scatter(*X.T)
-plt.title("Data Points")
-plt.show()
 
-# Apply KMeans
-kmeans = KMeans(n_clusters=4).fit(X)
 
-# Plot clustered data with centers
-plt.scatter(*X.T, c=kmeans.labels_)
-plt.scatter(*kmeans.cluster_centers_.T,  color='red')
-plt.title("Clustered Data")
-plt.show()
+
+4.
+
+print " Enter file name: "
+fn = gets.chomp
+
+if File.exist?(fn)
+  full_path = File.expand_path(fn)
+  puts "File exist at #{full_path}"
+
+  ex=File.extname(fn)
+
+  if ex == ""
+    puts "no extension found"
+  else
+    puts "file extension  : ",ex
+  end
+end
+
+
+
+
+5.
+print "Enter a: "
+a= gets.chomp.to_i   
+print "Enter b: "
+b= gets.chomp.to_i   
+print "Enter c: "
+c= gets.chomp.to_i   
+  
+if a>b and a>c
+  	 puts "greatest number is: #{a} "   
+elsif  b>c   
+	puts "greatest number is: #{b} "  
+else 
+  puts "greatest number is: #{c} "   
+end
+
+
+
+6.
+
+print "Enter the number from which you want odd numbers : "
+n = gets.chomp.to_i
+
+while n>0
+	if n%2 != 0
+		print n," "
+	end
+	n -= 1
+
+end
+
+7.
+
+print "Enter a: "
+a= gets.chomp.to_i   
+print "Enter b: "
+b= gets.chomp.to_i 
+
+if a==20 or b==20
+	puts "true"
+else
+	puts "sum = #{a+b}"
+end
+
+
+
+8.
+
+
+print "Enter first temperature : "
+t1 = gets.chomp.to_i
+
+print "Enter Second temperature : "
+t2 = gets.chomp.to_i
+
+if(t1 < 0 && t2>100 ||  t1 > 100 && t2 < 0 )
+    puts "True"
+else 
+  puts "False"
+  end
+
+
+
+9.
+
+
+arr = []
+
+print "Enter the number of elements : "
+n = gets.chomp.to_i
+for i in 1..n
+  print "Enter Element #{i} : "
+  arr << gets.chomp.to_i
+end
+
+print arr ,"\n"
+
+arr.push 60
+arr.insert(2,90)
+arr.unshift(5)
+print arr ,"\n"
+
+
+a = arr.pop
+b = arr.shift
+arr.delete(90)
+print arr ,"\n"
+
+print "Popped element: ", a ,"\n"
+print "Shifted element: ", b ,"\n"
+
+
+print "Element at index 2: ", arr[2] ,"\n"
+
+
+arr[1] = 25
+print arr ,"\n"
+
+
+print "Index of 30: ", arr.index(30) ,"\n"
+print "Include 50?: ", arr.include?(50) ,"\n"
+
+
+print "Length: ", arr.length ,"\n"
+
+
+sorted = arr.sort
+print "Sorted: ", sorted ,"\n"
+
+
+rev = arr.reverse
+print "Reversed: ", rev ,"\n"
+
+
+print "Elements: "
+arr.each do |x|
+  print x ," "
+end
+print "\n"
+
+
+dup = [1,2,2,3,3,4]
+print "Unique: ", dup.uniq ,"\n"
+
+
+arr.clear
+print "After clear: ", arr ,"\n"
+
+
+
+10.
+
+marks = {}
+
+print "Enter the number of Subjects : "
+n = gets.chomp.to_i
+
+for i in 1..n
+  print "Enter subject #{i} name : "
+  subject = gets.chomp
+
+  print "Enter marks of #{subject}: "
+  score = gets.chomp.to_i
+
+  marks[subject] = score
+end
+
+puts "Marks : "
+print marks,"\n"
+
+total_marks = 0
+
+for score in marks.values 
+  total_marks += score
+end
+
+print "Total marks : #{total_marks}"
+
+
+
+TCL
+
+
+1.
+
+puts "Enter a number : "
+gets stdin num
+
+set fact 1
+
+for {set i 1} {$i<=$num} {incr i} {
+    set fact [expr {$fact * $i}]
+}
+
+puts "Factorial : $fact"
+
+
+2.
+
+set result 1
+for {set i 1} {$i <= 10} {incr i} {
+    set result [expr {$result * $i}]
+}
+puts "Product from 1 to 10 is $result"
+
+
+3.
+
+
+proc compare {a b} {
+    if {$a > $b} {
+        return 1
+    } elseif {$a < $b} {
+        return -1
+    } else  {
+        return 0   
+    }
+}
+
+set list {6 5 3 9 1}
+
+puts "Original List : $list"
+
+set sorted_list [lsort -command compare $list]
+
+puts "Soretd list : $sorted_list" 
+
+
+4.
+
+# Take list input from user
+puts "Enter elements for list1 (space-separated):"
+gets stdin input1
+set mylist $input1
+
+# Append elements dynamically
+puts "Enter elements to append to list1:"
+gets stdin append_input
+eval lappend mylist $append_input
+
+# Traversing list
+puts "\nTraversing list:"
+foreach item $mylist {
+    puts $item
+}
+
+# Length of list
+puts "\nLength of list: [llength $mylist]"
+
+# Access element (index)
+puts "Element at index 0: [lindex $mylist 0]"
+
+# Replace element
+set mylist [lreplace $mylist 0 0 100]
+puts "After replacing first element with 100: $mylist"
+
+# Search element
+set pos [lsearch $mylist 5]
+puts "Position of element 5: $pos"
+
+# Sort list
+set sorted_list [lsort $mylist]
+puts "Sorted list: $sorted_list"
+
+# Reverse list
+set reversed_list [lreverse $mylist]
+puts "Reversed list: $reversed_list"
+
+# Take second list input
+puts "\nEnter elements for list2 (space-separated):"
+gets stdin input2
+set list2 $input2
+
+# Concatenate lists
+set newlist [concat $mylist $list2]
+puts "Concatenated list: $newlist"
+
+
+5.
+
+
+set file1 "t.txt"
+set file2 "t1.txt"
+
+set time1 [file mtime $file1]
+set time2 [file mtime $file2]
+
+if {$time1 > $time2} {
+    puts "$file1 is newer"
+} elseif {$time1 < $time2} {
+    puts "$file2 is newer"
+} else {
+    puts "Both files have same modification time"
+}
+
+
+6.
+ 
+
+set src "t.txt"
+set dest "t1.txt"
+
+set in [open $src r]
+set out [open $dest w]
+
+fconfigure $out -translation auto
+
+while {[gets $in line] >= 0} {
+    puts $out $line
+}
+
+close $in
+close $out
+puts "File copied with native translation"
+
+
+PERL 
+
+
+
+1.
+
+
+print "Enter first number: ";
+my $a = <STDIN>;
+chomp($a);
+
+print "Enter second number: ";
+my $b = <STDIN>;
+chomp($b);
+
+print "Enter third number: ";
+my $c = <STDIN>;
+chomp($c);
+
+if ($a == $b && $a == $c) 
+{
+    print "All numbers are equal\n";
+}
+elsif ($a >= $b && $a >= $c) 
+{
+    print "Largest number is: $a\n";
+}
+elsif ($b >= $c) {
+    print "Largest number is: $b\n";
+}
+else {
+    print "Largest number is: $c\n";
+}
+
+
+
+
+2.
+
+sub print_table {
+    my ($num) = @_;
+
+    print "\nMultiplication Table for $num:\n";
+
+    for my $i (1..10) {
+        print "$num x $i = ", $num * $i, "\n";
+    }
+}
+
+# Call subroutine for numbers 1 to 10
+for my $n (1..10) {
+    print_table($n);
+}
+
+
+3.
+
+
+print "Enter numbers separated by space: ";
+chomp(my $input = <STDIN>);
+
+my @numbers = split(" ", $input);
+
+print "\nOriginal: @numbers\n";
+
+my $shifted = shift @numbers;
+print "After shift (@numbers) ,Removed : $shifted\n";
+
+unshift @numbers, 5;
+print "After unshift (@numbers)\n";
+
+push @numbers, 50;
+print "After push (@numbers)\n";
+
+my $popped = pop @numbers;
+print "After pop (@numbers), removed: $popped\n";
+
+print "Reversed: ", join(" ", reverse(@numbers)), "\n";
+
+print "Sorted (Ascending): ", join(" ", sort { $a <=> $b } @numbers), "\n";
+
+print "Sorted (Descending): ", join(" ", sort { $b <=> $a } @numbers), "\n";
+
+print "Joined with comma: ", join(",", @numbers), "\n";
+
+print "Length of array: ", scalar(@numbers), "\n";
+
+print "Slice (first 2 elements): ", @numbers[0..1], "\n";
+
+my @removed = splice(@numbers, 1, 2, 100, 200);
+print "After splice (@numbers), removed: @removed\n";
+
+# my @even = grep { $_ % 2 == 0 } @numbers;
+# print "Even numbers: @even\n";
+
+# my @squares = map { $_ * $_ } @numbers;
+# print "Squares: @squares\n";
+
+my $max = $numbers[0];
+foreach my $n (@numbers) {
+    if ($n > $max) {
+        $max = $n;
+    }
+}
+print "Maximum element: $max\n";
+
+my $min = $numbers[0];
+foreach my $n (@numbers) {
+    if ($n < $min) {
+        $min = $n;
+    }
+}
+print "Minimum element: $min\n";
+
+my $search = 5;
+if (grep { $_ == $search } @numbers) {
+    print "$search exists in array\n";
+} else {
+    print "$search not found in array\n";
+}
+
+
+4.
+
+
+$sentence = "Perl is great at manipulating strings, naturally."; 
+print "$sentence \n\n"; 
+$replacement = "is totally awesome"; 
+substr($sentence, 5, 8) = $replacement; 
+print "Substituting $replacement staring at 5 and going 8 words \n"; 
+print "$sentence \n\n";
+
+
+5.
+
+#!/usr/bin/perl
+use strict;
+use warnings;
+
+print "Enter an IP address: ";
+chomp(my $ip = <STDIN>);
+
+print "Enter an Email address: ";
+chomp(my $email = <STDIN>);
+
+my $ip_pattern = qr/^
+
+    (25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d) \.
+    (25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d) \.
+    (25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d) \.
+    (25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d) 
+$/x;
+
+if ($ip =~ $ip_pattern) {
+    print "Valid IP address\n";
+} else {
+    print "Invalid IP address\n";
+}
+
+my $email_pattern = qr/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+if ($email =~ $email_pattern) {
+    print "Valid Email address\n";
+} else {
+    print "Invalid Email address\n";
+}
+
+
+
+6.
+
+#!/usr/bin/perl
+use strict;
+use warnings;
+
+# Check if filename is passed
+if (@ARGV != 1) {
+    die "Usage: perl $0 numbers.txt\n";
+}
+
+my $file = $ARGV[0];
+
+# Open the file
+open(my $fh, "<", $file) or die "Cannot open file";
+
+# Read all lines into an array
+my @lines = <$fh>;
+close($fh);
+
+print @lines;
+
+print reverse @lines
+
+
+
