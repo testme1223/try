@@ -1,565 +1,208 @@
-RUBY
 
-1.
 
 
-print " Enter string: "
-str = gets.chomp
+from collections import deque
+from itertools import permutations
+
+# -------------------------------
+# 1. BFS (User Input Graph)
+# -------------------------------
+from collections import deque
 
-print "Enter n: "
-n = gets.chomp.to_i   
+graph = {}
+n = int(input("Enter number of nodes: "))
 
-for i in 1..n  
-  if n!=0
-    print str ," " 
-  end
-end  
+for _ in range(n):
+    node = input("Enter node: ")
+    neighbors = input(f"Enter neighbors of {node} (space separated): ").split()
+    graph[node] = neighbors
 
+start = input("Enter start node: ")
 
+visited = set()
+queue = deque([start])
 
-2.
-print "Enter radius of the circle: "
-n= gets.chomp.to_i  
+print("BFS Traversal:")
+while queue:
+    node = queue.popleft()
+    if node not in visited:
+        print(node, end=" ")
+        visited.add(node)
+        for neighbor in graph.get(node,[]):
+            if neighbor not in visited:
+                queue.append(neighbor)
+print()
 
-puts "parameter of the circle : #{(2*Math::PI*n).round(2)}"
- puts "area of the circle : #{(Math::PI*(n**2)).round(2)}"
 
+# ------------------------------- 
+# 2. DFS
+# -------------------------------
+def dfs_util(graph, node, visited):
+    if node not in visited:
+        print(node, end=" ")
+        visited.add(node)
 
+        for n in graph.get(node, []):   # FIXED
+            dfs_util(graph, n, visited)
 
 
-3.
-print " Enter first name: "
-fname = gets.chomp
-print " Enter last name: "
-lname = gets.chomp
+graph = {}
+n = int(input("Enter number of nodes: "))
 
-name = fname +" " + lname
+for _ in range(n):
+    node = input("Enter node: ")
+    neighbors = input(f"Enter neighbors of {node}: ").split()
+    graph[node] = neighbors
 
-print "Full Name : \n",name
+start = input("Enter start node: ")
 
-words = name.split(" ")
+print("DFS Traversal:")
+dfs_util(graph, start, set())
+print()
 
-reverse = words.reverse.join(" ")
 
-puts "\nReversed name : #{reverse}\n"
+# -------------------------------
+# 3. Tic Tac Toe
+# -------------------------------
+board = [" "] * 9
 
+def print_board():
+    for i in range(0, 9, 3):
+        print(board[i:i+3])
 
+def check_winner(p):
+    wins = [(0,1,2),(3,4,5),(6,7,8),
+            (0,3,6),(1,4,7),(2,5,8),
+            (0,4,8),(2,4,6)]
+    return any(board[a]==board[b]==board[c]==p for a,b,c in wins)
 
-reverse_full = name.reverse
-print "Reversed :  #{reverse_full}"
+player = "X"
+winner=False
+for _ in range(9):
+    print_board()
+    move = int(input(f"{player} move (0-8): "))
+    if board[move] == " ":
+        board[move] = player
+        if check_winner(player):
+            print_board()
+            print(player, "wins!")
+            winner=False
+            break
+        player = "O" if player=="X" else "X"
+    else:
+        print("Invalid move")
+if not winner:
+    print("Draw!")
 
 
 
+# -------------------------------
+# 4. 8 Puzzle
+# -------------------------------
 
-4.
+def print_board(board):
+    for i in range(0, 9, 3):
+        print(board[i], board[i+1], board[i+2])
+    print()
 
-print " Enter file name: "
-fn = gets.chomp
+board = [1,2,3,4,0,6,7,5,8]
 
-if File.exist?(fn)
-  full_path = File.expand_path(fn)
-  puts "File exist at #{full_path}"
+while True:
+    print_board(board)
 
-  ex=File.extname(fn)
+    if board == [1,2,3,4,5,6,7,8,0]:
+        print("Puzzle Solved!")
+        break
 
-  if ex == ""
-    puts "no extension found"
-  else
-    puts "file extension  : ",ex
-  end
-end
+    move = input("Move (w=up, s=down, a=left, d=right): ")
 
+    pos = board.index(0)
 
+    if move == "w" and pos not in [0,1,2]:
+        board[pos], board[pos-3] = board[pos-3], board[pos]
 
+    elif move == "s" and pos not in [6,7,8]:
+        board[pos], board[pos+3] = board[pos+3], board[pos]
 
-5.
-print "Enter a: "
-a= gets.chomp.to_i   
-print "Enter b: "
-b= gets.chomp.to_i   
-print "Enter c: "
-c= gets.chomp.to_i   
-  
-if a>b and a>c
-  	 puts "greatest number is: #{a} "   
-elsif  b>c   
-	puts "greatest number is: #{b} "  
-else 
-  puts "greatest number is: #{c} "   
-end
+    elif move == "a" and pos not in [0,3,6]:
+        board[pos], board[pos-1] = board[pos-1], board[pos]
 
+    elif move == "d" and pos not in [2,5,8]:
+        board[pos], board[pos+1] = board[pos+1], board[pos]
 
+    else:
+        print("Invalid move!")
 
-6.
+   
 
-print "Enter the number from which you want odd numbers : "
-n = gets.chomp.to_i
+# -------------------------------
+# 5. Water Jug
+# -------------------------------
 
-while n>0
-	if n%2 != 0
-		print n," "
-	end
-	n -= 1
+x = int(input("Enter capacity of jug1: "))
+y = int(input("Enter capacity of jug2: "))
+target = int(input("Enter target: "))
 
-end
+visited = set()
+stack = [(0,0)]
 
-7.
+print("Steps:")
+while stack:
+    a, b = stack.pop()
+    if (a,b) in visited:
+        continue
+    visited.add((a,b))
+    print(a, b)
 
-print "Enter a: "
-a= gets.chomp.to_i   
-print "Enter b: "
-b= gets.chomp.to_i 
+    if a == target or b == target:
+        print("Target reached")
+        return
 
-if a==20 or b==20
-	puts "true"
-else
-	puts "sum = #{a+b}"
-end
+    stack.extend([
+        (x,b),(a,y),(0,b),(a,0),
+        (max(0,a-(y-b)), min(y,b+a)),
+        (min(x,a+b), max(0,b-(x-a)))
+    ])
 
 
+# -------------------------------
+# 6. TSP
+# -------------------------------
 
-8.
+n = int(input("Enter number of cities: "))
+graph = []
 
+print("Enter cost matrix:")
+for _ in range(n):
+    row = list(map(int, input().split()))
+    graph.append(row)
 
-print "Enter first temperature : "
-t1 = gets.chomp.to_i
+cities = list(range(n))
+min_cost = float('inf')
+bp=None
+for perm in permutations(cities):
+    cost = 0
+    path=(0,)+perm(0, )
+    for i in range(len(path)-1):
+        cost+=graph[path[i]][path[i+1]]
+    if cost<min_cost:
+        min_cost=cost
+        bp=path
 
-print "Enter Second temperature : "
-t2 = gets.chomp.to_i
+print("Minimum Cost:", min_cost)
+print("Best Path:", bp)
 
-if(t1 < 0 && t2>100 ||  t1 > 100 && t2 < 0 )
-    puts "True"
-else 
-  puts "False"
-  end
 
+# -------------------------------
+# 7. Tower of Hanoi
+# -------------------------------
+def hanoi(n, source, target, auxiliary):
+    if n == 1:
+        print(f"Move disk 1 from {source} to {target}")
+        return
+    hanoi(n-1, source, auxiliary, target)
+    print(f"Move disk {n} from {source} to {target}")
+    hanoi(n-1, auxiliary, target, source)
 
-
-9.
-
-
-arr = []
-
-print "Enter the number of elements : "
-n = gets.chomp.to_i
-for i in 1..n
-  print "Enter Element #{i} : "
-  arr << gets.chomp.to_i
-end
-
-print arr ,"\n"
-
-arr.push 60
-arr.insert(2,90)
-arr.unshift(5)
-print arr ,"\n"
-
-
-a = arr.pop
-b = arr.shift
-arr.delete(90)
-print arr ,"\n"
-
-print "Popped element: ", a ,"\n"
-print "Shifted element: ", b ,"\n"
-
-
-print "Element at index 2: ", arr[2] ,"\n"
-
-
-arr[1] = 25
-print arr ,"\n"
-
-
-print "Index of 30: ", arr.index(30) ,"\n"
-print "Include 50?: ", arr.include?(50) ,"\n"
-
-
-print "Length: ", arr.length ,"\n"
-
-
-sorted = arr.sort
-print "Sorted: ", sorted ,"\n"
-
-
-rev = arr.reverse
-print "Reversed: ", rev ,"\n"
-
-
-print "Elements: "
-arr.each do |x|
-  print x ," "
-end
-print "\n"
-
-
-dup = [1,2,2,3,3,4]
-print "Unique: ", dup.uniq ,"\n"
-
-
-arr.clear
-print "After clear: ", arr ,"\n"
-
-
-
-10.
-
-marks = {}
-
-print "Enter the number of Subjects : "
-n = gets.chomp.to_i
-
-for i in 1..n
-  print "Enter subject #{i} name : "
-  subject = gets.chomp
-
-  print "Enter marks of #{subject}: "
-  score = gets.chomp.to_i
-
-  marks[subject] = score
-end
-
-puts "Marks : "
-print marks,"\n"
-
-total_marks = 0
-
-for score in marks.values 
-  total_marks += score
-end
-
-print "Total marks : #{total_marks}"
-
-
-
-TCL
-
-
-1.
-
-puts "Enter a number : "
-gets stdin num
-
-set fact 1
-
-for {set i 1} {$i<=$num} {incr i} {
-    set fact [expr {$fact * $i}]
-}
-
-puts "Factorial : $fact"
-
-
-2.
-
-set result 1
-for {set i 1} {$i <= 10} {incr i} {
-    set result [expr {$result * $i}]
-}
-puts "Product from 1 to 10 is $result"
-
-
-3.
-
-
-proc compare {a b} {
-    if {$a > $b} {
-        return 1
-    } elseif {$a < $b} {
-        return -1
-    } else  {
-        return 0   
-    }
-}
-
-set list {6 5 3 9 1}
-
-puts "Original List : $list"
-
-set sorted_list [lsort -command compare $list]
-
-puts "Soretd list : $sorted_list" 
-
-
-4.
-
-# Take list input from user
-puts "Enter elements for list1 (space-separated):"
-gets stdin input1
-set mylist $input1
-
-# Append elements dynamically
-puts "Enter elements to append to list1:"
-gets stdin append_input
-eval lappend mylist $append_input
-
-# Traversing list
-puts "\nTraversing list:"
-foreach item $mylist {
-    puts $item
-}
-
-# Length of list
-puts "\nLength of list: [llength $mylist]"
-
-# Access element (index)
-puts "Element at index 0: [lindex $mylist 0]"
-
-# Replace element
-set mylist [lreplace $mylist 0 0 100]
-puts "After replacing first element with 100: $mylist"
-
-# Search element
-set pos [lsearch $mylist 5]
-puts "Position of element 5: $pos"
-
-# Sort list
-set sorted_list [lsort $mylist]
-puts "Sorted list: $sorted_list"
-
-# Reverse list
-set reversed_list [lreverse $mylist]
-puts "Reversed list: $reversed_list"
-
-# Take second list input
-puts "\nEnter elements for list2 (space-separated):"
-gets stdin input2
-set list2 $input2
-
-# Concatenate lists
-set newlist [concat $mylist $list2]
-puts "Concatenated list: $newlist"
-
-
-5.
-
-
-set file1 "t.txt"
-set file2 "t1.txt"
-
-set time1 [file mtime $file1]
-set time2 [file mtime $file2]
-
-if {$time1 > $time2} {
-    puts "$file1 is newer"
-} elseif {$time1 < $time2} {
-    puts "$file2 is newer"
-} else {
-    puts "Both files have same modification time"
-}
-
-
-6.
- 
-
-set src "t.txt"
-set dest "t1.txt"
-
-set in [open $src r]
-set out [open $dest w]
-
-fconfigure $out -translation auto
-
-while {[gets $in line] >= 0} {
-    puts $out $line
-}
-
-close $in
-close $out
-puts "File copied with native translation"
-
-
-PERL 
-
-
-
-1.
-
-
-print "Enter first number: ";
-my $a = <STDIN>;
-chomp($a);
-
-print "Enter second number: ";
-my $b = <STDIN>;
-chomp($b);
-
-print "Enter third number: ";
-my $c = <STDIN>;
-chomp($c);
-
-if ($a == $b && $a == $c) 
-{
-    print "All numbers are equal\n";
-}
-elsif ($a >= $b && $a >= $c) 
-{
-    print "Largest number is: $a\n";
-}
-elsif ($b >= $c) {
-    print "Largest number is: $b\n";
-}
-else {
-    print "Largest number is: $c\n";
-}
-
-
-
-
-2.
-
-sub print_table {
-    my ($num) = @_;
-
-    print "\nMultiplication Table for $num:\n";
-
-    for my $i (1..10) {
-        print "$num x $i = ", $num * $i, "\n";
-    }
-}
-
-# Call subroutine for numbers 1 to 10
-for my $n (1..10) {
-    print_table($n);
-}
-
-
-3.
-
-
-print "Enter numbers separated by space: ";
-chomp(my $input = <STDIN>);
-
-my @numbers = split(" ", $input);
-
-print "\nOriginal: @numbers\n";
-
-my $shifted = shift @numbers;
-print "After shift (@numbers) ,Removed : $shifted\n";
-
-unshift @numbers, 5;
-print "After unshift (@numbers)\n";
-
-push @numbers, 50;
-print "After push (@numbers)\n";
-
-my $popped = pop @numbers;
-print "After pop (@numbers), removed: $popped\n";
-
-print "Reversed: ", join(" ", reverse(@numbers)), "\n";
-
-print "Sorted (Ascending): ", join(" ", sort { $a <=> $b } @numbers), "\n";
-
-print "Sorted (Descending): ", join(" ", sort { $b <=> $a } @numbers), "\n";
-
-print "Joined with comma: ", join(",", @numbers), "\n";
-
-print "Length of array: ", scalar(@numbers), "\n";
-
-print "Slice (first 2 elements): ", @numbers[0..1], "\n";
-
-my @removed = splice(@numbers, 1, 2, 100, 200);
-print "After splice (@numbers), removed: @removed\n";
-
-# my @even = grep { $_ % 2 == 0 } @numbers;
-# print "Even numbers: @even\n";
-
-# my @squares = map { $_ * $_ } @numbers;
-# print "Squares: @squares\n";
-
-my $max = $numbers[0];
-foreach my $n (@numbers) {
-    if ($n > $max) {
-        $max = $n;
-    }
-}
-print "Maximum element: $max\n";
-
-my $min = $numbers[0];
-foreach my $n (@numbers) {
-    if ($n < $min) {
-        $min = $n;
-    }
-}
-print "Minimum element: $min\n";
-
-my $search = 5;
-if (grep { $_ == $search } @numbers) {
-    print "$search exists in array\n";
-} else {
-    print "$search not found in array\n";
-}
-
-
-4.
-
-
-$sentence = "Perl is great at manipulating strings, naturally."; 
-print "$sentence \n\n"; 
-$replacement = "is totally awesome"; 
-substr($sentence, 5, 8) = $replacement; 
-print "Substituting $replacement staring at 5 and going 8 words \n"; 
-print "$sentence \n\n";
-
-
-5.
-
-#!/usr/bin/perl
-use strict;
-use warnings;
-
-print "Enter an IP address: ";
-chomp(my $ip = <STDIN>);
-
-print "Enter an Email address: ";
-chomp(my $email = <STDIN>);
-
-my $ip_pattern = qr/^
-
-    (25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d) \.
-    (25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d) \.
-    (25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d) \.
-    (25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d) 
-$/x;
-
-if ($ip =~ $ip_pattern) {
-    print "Valid IP address\n";
-} else {
-    print "Invalid IP address\n";
-}
-
-my $email_pattern = qr/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
-
-if ($email =~ $email_pattern) {
-    print "Valid Email address\n";
-} else {
-    print "Invalid Email address\n";
-}
-
-
-
-6.
-
-#!/usr/bin/perl
-use strict;
-use warnings;
-
-# Check if filename is passed
-if (@ARGV != 1) {
-    die "Usage: perl $0 numbers.txt\n";
-}
-
-my $file = $ARGV[0];
-
-# Open the file
-open(my $fh, "<", $file) or die "Cannot open file";
-
-# Read all lines into an array
-my @lines = <$fh>;
-close($fh);
-
-print @lines;
-
-print reverse @lines
-
-
-
+n = int(input("Enter number of disks: "))
+hanoi(n, 'A', 'C', 'B')
