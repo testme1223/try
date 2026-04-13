@@ -206,3 +206,90 @@ def hanoi(n, source, target, auxiliary):
 
 n = int(input("Enter number of disks: "))
 hanoi(n, 'A', 'C', 'B')
+
+
+
+8.
+
+from collections import deque
+
+def monkey_banana():
+    start = ('Far', 'NotUnder', 'Off', 'Empty')
+    goal = ('Near', 'Under', 'On', 'Holding')
+
+    actions = {
+        "move" : lambda s : ('Near',s[1],s[2],s[3]) if s[0] != 'Near' else None,
+        "push" : lambda s : ('Near','Under',s[2],s[3]) if s[0] == 'Near' and s[1] != 'Under' else None,
+        "climb" : lambda s : ('Near','Under','On',s[3]) if s[0] == 'Near' and s[1] == 'Under' and s[2] != 'On' else None,
+        "grab" : lambda s : ('Near','Under','On','Holding') if s[0] == 'Near' and s[1] == 'Under' and s[2] == 'On'  and s[3] != 'Holding' else None
+        
+    }
+
+    q = deque([(start, [])])
+    visited = set()
+
+    print("Initial:", start)
+
+    while q:
+        state, path = q.popleft()
+
+        if state == goal:
+            print("\nSolution Found:")
+            for i in path:
+                print(i)
+            print("\nFinal:", state)
+            return
+
+        if state in visited:
+            continue
+        visited.add(state)
+
+        for name, func in actions.items():
+            new = func(state)
+            if new and (new not in visited):
+                q.append((new, path + ["Action : " + name, "Resulting state : " , new]))
+
+monkey_banana()
+
+
+
+9.
+
+
+import math
+
+def ab(d, i, maxP, v, a, b):
+    if d == 0:
+        return v[i]
+
+    if maxP:
+        val = -math.inf
+        for j in range(2):
+            val = max(val,ab(d-1,i*2+j,False,v,a,b))
+            a = max(a,val)
+            if a >= b:
+                break
+        return val
+    else :
+        val = math.inf
+        for j in range(2):
+            val = min(val,ab(d-1,i*2+j,True,v,a,b))
+            b = min(b,val)
+            if a >= b:
+                break
+        return val
+            
+
+ 
+
+# --------- Dynamic Input ---------
+depth = int(input("Enter depth: "))
+
+n = 2**depth   # number of leaf nodes
+values = list(map(int, input(f"Enter {n} leaf values: ").split()))
+
+result = ab(depth, 0, True, values, -math.inf, math.inf)
+print("Optimal value:", result)
+
+
+
